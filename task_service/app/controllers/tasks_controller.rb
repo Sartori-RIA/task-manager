@@ -22,7 +22,6 @@ class TasksController < ApplicationController
   def update
     @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
-      # Notificar serviço de notificações
       NotificationService.notify(@task)
       render json: @task
     else
