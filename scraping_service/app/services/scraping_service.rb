@@ -9,6 +9,7 @@ class ScrapingService
   def scrape
     html = open(@url)
     doc = Nokogiri::HTML(html)
+    byebug
     "do something with the content"
   end
 end
