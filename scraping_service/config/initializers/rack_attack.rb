@@ -31,7 +31,7 @@ class Rack::Attack
   end
 
   # Bloquear solicitações de IPs suspeitos por 5 minutos após 5 solicitações falhas
-  self.blocklisted_response = lambda do |env|
+  self.blocklisted_responder = lambda do |env|
     [503, {}, ["Your IP has been blocked.\n"]]
   end
 

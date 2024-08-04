@@ -1,63 +1,86 @@
 services:
   db:
-    image: mysql:5.7
+    container_name: mysql
+    image: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: task_manager
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: mysql
+    platform: linux/x86_64
     ports:
-      - "3306:3306"
-    volumes:
-      - db_data:/var/lib/mysql
+      - 3306:3306
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   adminer:
+    container_name: adminer
     image: adminer
+    platform: linux/x86_64
     ports:
       - 8080:8080
 
+  task_migrations:
+    container_name: task_migrations
+    build:
+      context: ./task_migrations
+    platform: linux/x86_64
+    depends_on:
+      db:
+        condition: service_healthy
+    command: bash -c "bundle exec rails db:create &&  bundle exec rails db:migrate &&  bundle exec rails db:seed"
+    env_file:
+      - .env
+
   auth_service:
+    container_name: auth_service
     build:
       context: ./auth_service
+    platform: linux/x86_64
     depends_on:
       - db
-    environment:
-      DATABASE_HOST: db
+    env_file:
+      - .env
     ports:
-      - "3001:3000"
+      - 3001:3000
 
   notification_service:
+    container_name: notification_service
     build:
       context: ./notification_service
+    platform: linux/x86_64
     depends_on:
       - db
-    environment:
-      DATABASE_HOST: db
+    env_file:
+      - .env
     ports:
-      - "3002:3000"
+      - 3002:3000
 
   scraping_service:
+    container_name: scraping_service
     build:
       context: ./scraping_service
+    platform: linux/x86_64
     depends_on:
       - db
-    environment:
-      DATABASE_HOST: db
+    env_file:
+      - .env
     ports:
-      - "3003:3000"
+      - 3003:3000
 
   task_service:
+    container_name: task_service
     build:
       context: ./task_service
+    platform: linux/x86_64
     depends_on:
       - db
       - auth_service
       - notification_service
       - scraping_service
-    environment:
-      DATABASE_HOST: db
+    env_file:
+      - .env
     ports:
-      - "3004:3000"
-
-volumes:
-  db_data:
+      - 3004:3000

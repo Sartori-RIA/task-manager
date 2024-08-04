@@ -2,7 +2,7 @@
 
 class Notification < ApplicationRecord
 
-  validates :title, :message, presence: true
+  validates :title, :message, :task_id, presence: true
 
   belongs_to :user, optional: false
 end
