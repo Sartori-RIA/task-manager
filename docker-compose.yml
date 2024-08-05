@@ -22,11 +22,13 @@ services:
     ports:
       - 8080:8080
 
-  task_migrations:
-    container_name: task_migrations
+  migrations:
+    container_name: migrations
     build:
       context: ./task_migrations
     platform: linux/x86_64
+    volumes:
+      - ./task_migrations:/rails
     depends_on:
       db:
         condition: service_healthy
@@ -34,11 +36,13 @@ services:
     env_file:
       - .env
 
-  auth_service:
-    container_name: auth_service
+  auth:
+    container_name: auth
     build:
       context: ./auth_service
     platform: linux/x86_64
+    volumes:
+      - ./auth_service:/rails
     depends_on:
       - db
     env_file:
@@ -46,11 +50,13 @@ services:
     ports:
       - 3001:3000
 
-  notification_service:
-    container_name: notification_service
+  notifications:
+    container_name: notifications
     build:
       context: ./notification_service
     platform: linux/x86_64
+    volumes:
+      - ./notification_service:/rails
     depends_on:
       - db
     env_file:
@@ -58,11 +64,13 @@ services:
     ports:
       - 3002:3000
 
-  scraping_service:
-    container_name: scraping_service
+  scraping:
+    container_name: scraping
     build:
       context: ./scraping_service
     platform: linux/x86_64
+    volumes:
+      - ./scraping_service:/rails
     depends_on:
       - db
     env_file:
@@ -70,16 +78,18 @@ services:
     ports:
       - 3003:3000
 
-  task_service:
-    container_name: task_service
+  tasks:
+    container_name: task
     build:
       context: ./task_service
     platform: linux/x86_64
+    volumes:
+      - ./task_service:/rails
     depends_on:
       - db
-      - auth_service
-      - notification_service
-      - scraping_service
+      - auth
+      - notifications
+      - scraping
     env_file:
       - .env
     ports:
