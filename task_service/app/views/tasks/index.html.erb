@@ -1,0 +1,17 @@
+
+<%= link_to "ADD TASK", new_task_path, class: 'btn btn-primary' %>
+
+<h1>My Tasks</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>URL</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= render @tasks %>
+  </tbody>
+</table>

@@ -1,0 +1,25 @@
+<%= form_with(model: task) do |form| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= hidden_field_tag :jwt_token, cookies[:jwt_token] %>
+
+  <% if task.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+        <% task.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :url %>
+    <%= form.text_field :url, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

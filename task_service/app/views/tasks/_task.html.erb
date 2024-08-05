@@ -1,0 +1,9 @@
+<tr>
+  <td><%= task.id %></td>
+  <td><%= task.url %></td>
+  <td><%= task.status %></td>
+  <td>
+    <%= link_to 'Edit' ,edit_task_path(task), class: 'btn btn-link' %>
+    <%= link_to 'X', task_path(task), class: 'btn btn-danger', method: :delete %>
+  </td>
+</tr>

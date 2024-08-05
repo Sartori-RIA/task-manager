@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_02_134304) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_05_191742) do
   create_table "jwt_denylist", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_134304) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -50,4 +52,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_134304) do
 
   add_foreign_key "notifications", "tasks"
   add_foreign_key "notifications", "users"
+  add_foreign_key "tasks", "users"
 end
