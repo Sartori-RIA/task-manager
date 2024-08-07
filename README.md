@@ -7,9 +7,12 @@
 
 ### Starting the app
 
-- `docker compose up --build` -> only for the first time
-- `docker compose up` after the first time
-
+- RUN `docker compose up --build` -> only for the first time
+- RUN `docker compose up` after the first time
+- OPEN `http://localhost:3004/tasks`
+  - default user: 
+    - email: admin@email.com
+    - password: 123456
 
 ### Containers
 
