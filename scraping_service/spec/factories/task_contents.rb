@@ -3,6 +3,6 @@
 FactoryBot.define do
   factory :task_content do
     content { '' }
-    task { nil }
+    task
   end
 end
