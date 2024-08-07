@@ -30,6 +30,7 @@
 
 + UI
   + Bootstrap 5
+  + Font Awesome 6
 + Security
   + Devise
   + Devise-JWT
