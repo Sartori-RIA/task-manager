@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @task %>
 
 <div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
-
-  <%= button_to "Destroy this task", @task, method: :delete %>
+  <h3>Task: #<%= @task.id %> <%= tag.span @task.status, class: badge(@task) %></h3>
+  <p>
+    URL: <%= @task.url %>
+  </p>
+</div>
+<span class="badge badge-warning">Warning</span>
+<div>
+  <%= @task.task_content&.content %>
 </div>

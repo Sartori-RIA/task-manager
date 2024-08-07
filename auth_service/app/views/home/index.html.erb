@@ -1,7 +1,0 @@
-<% if current_user %>
-  <h1>Hi <%= current_user&.name %></h1>
-  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
-<% else %>
-  <h1>Please do the login first</h1>
-  <%= link_to 'Sign In', user_session_path %>
-<% end %>

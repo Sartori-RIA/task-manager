@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class TasksController < ApplicationController
-  before_action :find_task, only: [:destroy, :update, :edit, :show]
+  before_action :authenticate_request!
+  before_action :find_task, only: %i[destroy update edit show]
+  include TaskHelper
 
   def index
     @tasks = @current_user.tasks
   end
+
+  def show; end
 
   def new
     @task = Task.new
@@ -13,14 +17,12 @@ class TasksController < ApplicationController
 
   def edit; end
 
-  def show; end
-
   def create
     @task = @current_user.tasks.new(task_params)
     if @task.save
-      # Notificar serviço de notificações
       NotificationService.notify(@task)
-      redirect_to task_url(@task), notice: "Task was successfully created."
+      ScrapingService.notify(@task)
+      redirect_to tasks_url, notice: 'Task was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +31,8 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       NotificationService.notify(@task)
-      redirect_to task_path(@task), notice: "Task was successfully updated."
+      ScrapingService.notify(@task)
+      redirect_to tasks_url, notice: 'Task was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +40,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: "Task was successfully destroyed."
+    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
   end
 
   private

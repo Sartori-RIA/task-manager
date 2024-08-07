@@ -1,7 +1,15 @@
 
-<%= link_to "ADD TASK", new_task_path, class: 'btn btn-primary' %>
+<div style="display: flex; justify-content: space-between">
+  <h2>Hi <%= @current_user.name %></h2>
+  <%= link_to "Sign Out", sessions_path, method: :delete, class: 'btn btn-link' %>
+</div>
 
-<h1>My Tasks</h1>
+
+<div style="display: flex; justify-content: space-between">
+  <h3>My Tasks</h3>
+  <%= link_to "ADD TASK", new_task_path, class: 'btn btn-primary' %>
+</div>
+
 <table class="table">
   <thead>
   <tr>

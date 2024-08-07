@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_191742) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_07_005313) do
   create_table "jwt_denylist", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
@@ -26,6 +26,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_191742) do
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_notifications_on_task_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "task_contents", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.json "content"
+    t.bigint "task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_contents_on_task_id"
   end
 
   create_table "tasks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -52,5 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_191742) do
 
   add_foreign_key "notifications", "tasks"
   add_foreign_key "notifications", "users"
+  add_foreign_key "task_contents", "tasks"
   add_foreign_key "tasks", "users"
 end

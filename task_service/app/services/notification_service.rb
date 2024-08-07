@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
+require 'httparty'
+
 class NotificationService
+  include HTTParty
+  base_uri 'http://notifications:3000/notifications'
+  headers 'Content-Type' => 'application/json'
+
   def self.notify(task)
-    uri = URI.parse("http://notification_service:3002/notifications")
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri.request_uri, 'Content-Type' => 'application/json')
-    request.body = {
+    body = {
       title: "Task #{task.status}",
       message: "Task #{task.id} is now #{task.status}",
       user_id: task.user.id,
       task_id: task.id
-    }.to_json
-    http.request(request)
+    }
+
+    post('/', body: { notification: body }.to_json)
   end
 end

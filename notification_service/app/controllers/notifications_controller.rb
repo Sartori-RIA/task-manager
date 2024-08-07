@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class NotificationsController < ApplicationController
-  before_action :authenticate_user!
+  def index
+    @notifications = Notification.where(user_id: params[:user_id]).order(id: :desc)
+    render json: @notifications
+  end
 
   def create
-    notification = current_user.notifications.new(notification_params)
+    notification = Notification.new(notification_params)
     if notification.save
       render json: notification, status: :created
     else
@@ -15,6 +18,6 @@ class NotificationsController < ApplicationController
   private
 
   def notification_params
-    params.require(:notification).permit(:title, :message, :task_id)
+    params.require(:notification).permit(:title, :message, :task_id, :user_id)
   end
 end

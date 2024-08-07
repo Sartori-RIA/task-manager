@@ -14,6 +14,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+    networks:
+      - mynetwork
 
   adminer:
     container_name: adminer
@@ -21,6 +23,8 @@ services:
     platform: linux/x86_64
     ports:
       - 8080:8080
+    networks:
+      - mynetwork
 
   migrations:
     container_name: migrations
@@ -35,6 +39,8 @@ services:
     command: bash -c "bundle exec rails db:create &&  bundle exec rails db:migrate &&  bundle exec rails db:seed"
     env_file:
       - .env
+    networks:
+      - mynetwork
 
   auth:
     container_name: auth
@@ -49,6 +55,8 @@ services:
       - .env
     ports:
       - 3001:3000
+    networks:
+      - mynetwork
 
   notifications:
     container_name: notifications
@@ -63,6 +71,8 @@ services:
       - .env
     ports:
       - 3002:3000
+    networks:
+      - mynetwork
 
   scraping:
     container_name: scraping
@@ -77,9 +87,11 @@ services:
       - .env
     ports:
       - 3003:3000
+    networks:
+      - mynetwork
 
   tasks:
-    container_name: task
+    container_name: tasks
     build:
       context: ./task_service
     platform: linux/x86_64
@@ -94,3 +106,9 @@ services:
       - .env
     ports:
       - 3004:3000
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

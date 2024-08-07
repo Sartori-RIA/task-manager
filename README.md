@@ -17,10 +17,11 @@
 + Auth Service: `http://localhost:3001`
 + Notifications Service: `http://localhost:3002`
 + Scraping Service: `http://localhost:3003`
-+ Task Service: `http://localhost:3004`
++ (UI) Task Service: `http://localhost:3004`
 
-### End-points
+### Architecture
 
+![docker containers](containers.svg)
 
 ### Author
 
