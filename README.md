@@ -26,6 +26,30 @@
 
 ![docker containers](containers.svg)
 
+### Libs used here:
+
++ UI
+  + Bootstrap 5
++ Security
+  + Devise
+  + Devise-JWT
+  + Devise-argon2
+  + Rack-CORS
+  + Rack-attack
+  + Validators
+  + Brakeman
+  + Bundle Audit
++ Testing
+  + Rspec
+  + Factory Bot
+  + Parallel_tests
+  + simplecov
++ Style Guide
+  + Rubocop
++ HTTP requests
+  + HTTParty
+  + Nokogiri
+
 ### Author
 
 [GitHub](https://github.com/Sartori-RIA)
