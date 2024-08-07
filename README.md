@@ -22,6 +22,14 @@
 + Scraping Service: `http://localhost:3003`
 + (UI) Task Service: `http://localhost:3004`
 
+
+### Running Specs
+
++ docker compose exec auth bundle exec rspec
++ docker compose exec notifications bundle exec rspec
++ docker compose exec scraping bundle exec rspec
++ docker compose exec tasks bundle exec rspec
+
 ### Architecture
 
 ![docker containers](containers.svg)

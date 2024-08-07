@@ -200,7 +200,7 @@ GEM
     parallel (1.25.1)
     parallel_tests (4.7.1)
       parallel
-    parser (3.3.4.0)
+    parser (3.3.4.1)
       ast (~> 2.4.1)
       racc
     psych (5.1.2)
@@ -332,6 +332,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    validators (3.4.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     warden-jwt_auth (0.10.0)
@@ -393,6 +394,7 @@ DEPENDENCIES
   simplecov
   simplecov-console
   tzinfo-data
+  validators (~> 3.4, >= 3.4.2)
   web-console
 
 RUBY VERSION

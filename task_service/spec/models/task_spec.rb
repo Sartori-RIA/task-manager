@@ -4,12 +4,11 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   describe '#validates' do
-    it { is_expected.to validate_presence_of(:content) }
-    it { is_expected.to validate_inclusion_of(:status).in_array(%w[pending in_progress completed failed]) }
+    it { is_expected.to define_enum_for(:status).with_values(pending: 0, in_progress: 1, completed: 2, failed: 3) }
   end
 
   describe '#associations' do
     it { is_expected.to belong_to(:user).required }
-    it { is_expected.to have_one(:user).dependent(:delete) }
+    it { is_expected.to have_one(:task_content).dependent(:delete) }
   end
 end

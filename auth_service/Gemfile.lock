@@ -415,7 +415,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   rubocop-rspec_rails
-  shoulda-matchers
+  shoulda-matchers (~> 6.0)
   simplecov
   simplecov-console
   tzinfo-data

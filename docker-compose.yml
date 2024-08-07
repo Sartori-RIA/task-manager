@@ -36,7 +36,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: bash -c "bundle exec rails db:create &&  bundle exec rails db:migrate &&  bundle exec rails db:seed"
+    command: bash -c "bundle exec rails db:create &&  bundle exec rails db:migrate &&  bundle exec rails db:migrate RAILS_ENV=test &&  bundle exec rails db:seed"
     env_file:
       - .env
     networks:
