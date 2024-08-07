@@ -30,5 +30,8 @@ class MyScrapingService
     end
     task.completed!
     NotificationService.success(task_id, user_id)
+  rescue StandardError
+    task.failed!
+    NotificationService.error(task_id, user_id)
   end
 end
