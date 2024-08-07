@@ -12,15 +12,15 @@ class SessionsController < ApplicationController
       setup_jwt_cookie(token)
       redirect_to tasks_url
     else
-      flash[:error] = response.body
-      redirect_to new_session_url
+      flash[:errors] = response.body
+      redirect_to sessions_sign_in_path
     end
   end
 
   def destroy
     AuthService.sign_out
     cookies.delete(:jwt_token)
-    redirect_to new_session_url
+    redirect_to sessions_sign_in_path
   end
 
   protected

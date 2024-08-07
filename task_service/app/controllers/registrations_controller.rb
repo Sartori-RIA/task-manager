@@ -8,7 +8,7 @@ class RegistrationsController < ApplicationController
   def create
     response, token = AuthService.sign_up(email: sign_up_params[:email], password: sign_up_params[:password],
                                           name: sign_up_params[:name])
-    if response.status == 204
+    if response.code == 204
       @current_user = response.body
       setup_jwt_cookie(token)
       redirect_to tasks_url

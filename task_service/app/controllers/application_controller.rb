@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
         decoded_token = decode_jwt(token)
         @current_user = User.find(decoded_token['sub'])
       rescue JWT::DecodeError, ActiveRecord::RecordNotFound
-        redirect_to new_session_url
+        redirect_to sessions_sign_in_url
       end
     else
-      redirect_to new_session_url
+      redirect_to sessions_sign_in_url
     end
   end
 

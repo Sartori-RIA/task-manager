@@ -16,7 +16,7 @@ class AuthService
     end
 
     def sign_up(email:, password:, name:)
-      response = post('/registrations', body: { user: { email:, password:, name: } }.to_json)
+      response = post('/', body: { user: { email:, password:, name: } }.to_json)
       token = response.headers[:Authorization]&.gsub('Bearer', '')&.strip
 
       [response, token]

@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :users,
              defaults: { format: :json },
              controllers: {
-               sessions: 'sessions'
+               sessions: 'sessions',
+               registrations: 'registrations'
              }
 
   get 'up' => 'rails/health#show', as: :rails_health_check

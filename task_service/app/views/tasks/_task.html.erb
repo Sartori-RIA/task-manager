@@ -1,11 +1,15 @@
 <tr>
   <td><%= task.id %></td>
-  <td><%= link_to task.url, task_path(task), class: 'btn btn-link' %></td>
+  <td style="width: 70%"><%= link_to task.url, task_path(task), class: 'btn btn-link' %></td>
   <td><%= tag.span task.status, class: badge(task) %></td>
   <td>
-    <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-link' %>
-    <%= link_to 'Delete', task_path(action: :delete, id: task.id),
+    <%= link_to edit_task_path(task), class: 'btn btn-link' do %>
+      <i class="fa-regular fa-pen-to-square"></i>
+    <% end %>
+    <%= link_to task_path(action: :delete, id: task.id),
                 class: 'btn btn-danger',
-                data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+                data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } do %>
+      <i class="fa-regular fa-trash-can"></i>
+    <% end %>
   </td>
 </tr>

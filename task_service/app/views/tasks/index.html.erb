@@ -1,25 +1,22 @@
+<div class="container">
+  <div style="display: flex; justify-content: space-between">
+    <h3>My Tasks</h3>
+    <%= link_to new_task_path, class: 'btn btn-primary' do %>
+      <i class="fa-solid fa-plus"></i>
+    <% end %>
+  </div>
 
-<div style="display: flex; justify-content: space-between">
-  <h2>Hi <%= @current_user.name %></h2>
-  <%= link_to "Sign Out", sessions_path, method: :delete, class: 'btn btn-link' %>
+  <table class="table table-striped center" style="text-align: center">
+    <thead>
+    <tr >
+      <th>ID</th>
+      <th>URL</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render @tasks %>
+    </tbody>
+  </table>
 </div>
-
-
-<div style="display: flex; justify-content: space-between">
-  <h3>My Tasks</h3>
-  <%= link_to "ADD TASK", new_task_path, class: 'btn btn-primary' %>
-</div>
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>URL</th>
-    <th>Status</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= render @tasks %>
-  </tbody>
-</table>

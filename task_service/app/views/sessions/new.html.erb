@@ -1,23 +1,35 @@
-<h2>Log in</h2>
+<div class="container centered-card">
+  <div class="card" style="width: 18rem">
+    <div class="card-title" style="text-align: center">
+      <h2>Log in</h2>
+    </div>
+    <div class="card-body">
+      <% if flash[:errors].present? %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:errors] %>
+        </div>
+      <% end %>
 
-<% if flash[:error].present? %>
-  <div class="alert alert-danger" role="alert">
-    <%= flash[:error] %>
-  </div>
-<% end %>
+      <%= form_for(@user, url: sessions_sign_in_path, method: :post) do |f| %>
+        <div class="form-group">
+          <%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
 
-<%= form_for(@user, url: sessions_path, method: :post) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %><br/>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-  </div>
+        <div class="form-group">
+          <%= f.label :password %><br/>
+          <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        </div>
+        <br>
 
-  <div class="form-group">
-    <%= f.label :password %><br/>
-    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+        <div class="actions">
+          <%= f.submit "Log in", class: 'btn btn-primary' %>
+          &nbsp;
+          <%= link_to 'Sign up', new_registration_path ,class: 'btn btn-link' %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: 'btn btn-primary' %>
-  </div>
-<% end %>
+

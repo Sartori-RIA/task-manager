@@ -1,11 +1,19 @@
-
-<div>
-  <h3>Task: #<%= @task.id %> <%= tag.span @task.status, class: badge(@task) %></h3>
-  <p>
-    URL: <%= @task.url %>
-  </p>
-</div>
-<span class="badge badge-warning">Warning</span>
-<div>
-  <%= @task.task_content&.content %>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Task: #<%= @task.id %> <%= tag.span @task.status, class: badge(@task) %>
+    </div>
+    <div class="card-body">
+      <div>
+        <h3></h3>
+        <p>
+          URL: <%= @task.url %>
+        </p>
+      </div>
+      <span class="badge badge-warning">Warning</span>
+      <div>
+        <%= @task.task_content&.content %>
+      </div>
+    </div>
+  </div>
 </div>

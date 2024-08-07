@@ -1,10 +1,17 @@
-<h1>Editing task</h1>
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      Editing task
+    </div>
+    <div class="card-body">
+      <%= render "form", task: @task %>
 
-<%= render "form", task: @task %>
+      <br>
 
-<br>
-
-<div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
+      <div>
+        <%= link_to "Show this task", @task %> |
+        <%= link_to "Back to tasks", tasks_path %>
+      </div>
+    </div>
+  </div>
 </div>

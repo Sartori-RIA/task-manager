@@ -2,8 +2,10 @@
 
 Rails.application.routes.draw do
   resources :tasks
-  resources :sessions, only: %i[new create destroy]
-  resources :registrations, only: %i[new create]
+  get '/sessions/sign_in' => 'sessions#new'
+  post '/sessions/sign_in' => 'sessions#create'
+  delete '/sessions/sign_out' => 'sessions#destroy'
+  resources :registrations, only: %i[new create], path: 'sign_up'
 
   get 'up' => 'rails/health#show', as: :rails_health_check
 end
