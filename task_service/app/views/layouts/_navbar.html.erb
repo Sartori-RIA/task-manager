@@ -1,9 +1,24 @@
 <nav class="navbar bg-body-tertiary">
   <div class="container-fluid">
     <%= link_to 'Tasks', tasks_url, class: 'navbar-brand' %>
-    <div class="d-flex" role="search">
+    <div class="d-flex">
 
-      <%= link_to  "Sign Out", sessions_sign_out_path(action: :delete),
+
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-regular fa-bell"></i>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <% @notifications.each do |notification| %>
+            <li>
+             <strong><%= notification.title %></strong><br>
+              <small><%= notification.message %></small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <%= link_to "Sign Out", sessions_sign_out_path(action: :delete),
                   class: 'btn btn-link',
                   data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
     </div>

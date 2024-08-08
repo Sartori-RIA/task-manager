@@ -7,6 +7,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = @current_user.tasks
+    @notifications = @current_user.notifications
   end
 
   def show; end
