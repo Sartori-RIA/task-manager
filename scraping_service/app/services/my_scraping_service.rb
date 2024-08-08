@@ -20,7 +20,8 @@ class MyScrapingService
     content = {
       brand: doc.at_css('#VehicleBasicInformationTitle')&.text&.strip,
       model: doc.at_css('#VehicleBasicInformationTitle')&.text&.strip,
-      price: doc.at_css('#vehicleSendProposalPrice')&.text&.strip
+      price: doc.at_css('#vehicleSendProposalPrice')&.text&.strip,
+      title: doc.title
     }
     @model = TaskContent.new(task_id:, content:)
     if @model.save
