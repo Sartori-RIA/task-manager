@@ -2,12 +2,12 @@
 
 class TasksController < ApplicationController
   before_action :authenticate_request!
+  before_action :load_notifications
   before_action :find_task, only: %i[destroy update edit show]
   include TaskHelper
 
   def index
     @tasks = @current_user.tasks
-    @notifications = @current_user.notifications
   end
 
   def show; end
@@ -45,6 +45,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  def load_notifications
+    @notifications = @current_user.notifications
+  end
 
   def find_task
     @task = @current_user.tasks.find(params[:id])
